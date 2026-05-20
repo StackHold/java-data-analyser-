@@ -6,7 +6,11 @@ public class Funcionario extends Pessoa{
 
     //Criando construtor da classe Funcionario
     public Funcionario() {}
-
+    public Funcionario(String nome, String email, String cpf){
+        super.setNome(nome);
+        super.setEmail(email);
+        setCpf(cpf);
+    }
     //Criando getters e setters da classe Funcionario
     public String getCpf() {
         return cpf;

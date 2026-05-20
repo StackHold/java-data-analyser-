@@ -7,6 +7,12 @@ public class Cliente extends Pessoa{
 
     //Criando construtor da classe Cliente
     public Cliente() {}
+    public Cliente(String nome, String email, String cnpj, String segmento) {
+        super.setNome(nome);
+        super.setEmail(email);
+        setCnpj(cnpj);
+        setSegmento(segmento);
+    }
 
     //Criando getters e setters da classe Cliente
     public String getCnpj() {
