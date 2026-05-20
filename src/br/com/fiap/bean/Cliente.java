@@ -24,6 +24,6 @@ public class Cliente extends Pessoa{
 
     //Puxando metodo de pessoa
     public String apresentar() {
-        return String.format("Nome: %s\nEmail: %s\nCNPJ: %s\nSegmento da empresa: %s", super.getNome(), super.getEmail(), getCnpj(), getEmail());
+        return String.format("Nome: %s\nEmail: %s\nCNPJ: %s\nSegmento da empresa: %s", super.getNome(), super.getEmail(), getCnpj(), getSegmento());
     }
 }
