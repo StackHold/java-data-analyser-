@@ -33,6 +33,10 @@ public class Reuniao {
         this.cliente = cliente;
     }
 
+    public String getTranscricao() {
+        return transcricao;
+    }
+
     public void setTranscricao(String transcricao) {
         this.transcricao = transcricao;
     }
