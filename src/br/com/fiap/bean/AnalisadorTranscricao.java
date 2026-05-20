@@ -22,5 +22,23 @@ public class AnalisadorTranscricao {
     }
 
     //Criando metodos
+    public int contarOcorrencias(){
 
+    }
+
+    public String classificarReuniao(){
+        try {
+            if (pontuacao >= 10) {
+                return "Boa";
+            } else if (pontuacao >= 0 && pontuacao <= 10){
+                return  "Regular";
+            } else if (pontuacao < 0) {
+                return "Ruim";
+            } else {
+                throw new Exception("ERRO: Não à palavras para serem analisadas");
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }
