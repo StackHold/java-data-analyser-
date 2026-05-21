@@ -31,10 +31,10 @@ public class ResultadoAnalise {
 
     //Criando metodos da classe
     public String gerarRelatorio(){
-        return String.format("----Relatório da Reunião----\nPontuação: %d\nClassificação: %s\nRisco de Churn: %s", getPontuacao(), getClassificacao(), this.riscoChurn? "Sim" : "Não");
+        return String.format("====Relatório da Reunião====\nPontuação: %d\nClassificação: %s\nRisco de Churn: %s", getPontuacao(), getClassificacao(), this.riscoChurn? "Sim" : "Não");
     }
 
     public void exibirResultado(){
-        gerarRelatorio();
+        System.out.println(gerarRelatorio());
     }
 }
