@@ -18,20 +18,15 @@ public class AnalisadorTranscricao {
     public void setPalavraChave(Map<String, Categoria> palavrasChave) {
         this.palavrasChave = palavrasChave;
     }
-    public int getPontuacao() {
-        return pontuacao;
-    }
-
-    public void setTranscricao(String transcricao) {
-        this.transcricao = transcricao;
-    }
+    public int getPontuacao() { return pontuacao; }
+    public void setTranscricao(String transcricao) { this.transcricao = transcricao; }
 
     //Criando metodos
     private void contarOcorrencias(){
         this.categoriasEOcorrenciasEncontradas.clear();
 
         for(String palavra : this.transcricao.split("\\s")){
-            String palavraLimpa = palavra.toLowerCase().replace("[^a-zA-Z]", "");
+            String palavraLimpa = palavra.replace("[^a-zA-Z]", "").toLowerCase();
             if (this.palavrasChave.containsKey(palavraLimpa)){
                 Categoria cat = this.palavrasChave.get(palavra);
                 this.categoriasEOcorrenciasEncontradas.merge(cat, 1, Integer::sum);
@@ -49,6 +44,7 @@ public class AnalisadorTranscricao {
                 case RISCO_CHURN -> this.pontuacao -= 25 * quantidade;
             }
         });
+
         int chanceChurn = categoriasEOcorrenciasEncontradas.getOrDefault(Categoria.RISCO_CHURN, 0);
 
         if (chanceChurn >= 2) {
@@ -66,6 +62,9 @@ public class AnalisadorTranscricao {
         String classificacao = classificarReuniao();
         int pontuacao = getPontuacao();
         boolean riscoChurn = Objects.equals(classificacao, "Risco de Churn");
+        this.categoriasEOcorrenciasEncontradas.forEach((cat, quant)->{
+            System.out.println(cat + ":" + quant);
+        });
         return new ResultadoAnalise(pontuacao,classificacao,riscoChurn);
     }
 }
