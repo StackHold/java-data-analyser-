@@ -48,12 +48,12 @@ public class AnalisadorTranscricao {
 
     public String classificarReuniao(){
 
-        for (Categoria cat : this.palavrasChave.values()){
-            switch (cat){
-                case OPORTUNIDADE -> this.pontuacao += 15;
-                case PRODUTO_TOTVS -> this.pontuacao += 5;
-                case CONCORRENTE -> this.pontuacao -= 10;
-                case RISCO_CHURN -> this.pontuacao -= 25;
+        this.categoriasEOcorrenciasEncontradas.forEach((categoria, quantidade)->{
+            switch (categoria){
+                case OPORTUNIDADE -> this.pontuacao += 15 * quantidade;
+                case PRODUTO_TOTVS -> this.pontuacao += 5 * quantidade;
+                case CONCORRENTE -> this.pontuacao -= 10 * quantidade ;
+                case RISCO_CHURN -> this.pontuacao -= 25 * quantidade;
             }
         }
         // TODO classificações : ["Excelente","Produtiva","Neutra","Crítica","Risco de Churn"]
