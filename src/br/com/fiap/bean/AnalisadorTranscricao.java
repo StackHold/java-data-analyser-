@@ -55,6 +55,11 @@ public class AnalisadorTranscricao {
                 case CONCORRENTE -> this.pontuacao -= 10 * quantidade ;
                 case RISCO_CHURN -> this.pontuacao -= 25 * quantidade;
             }
+        });
+        int chanceChurn = categoriasEOcorrenciasEncontradas.getOrDefault(Categoria.RISCO_CHURN, 0);
+
+        if (chanceChurn >= 2) {
+            return "Risco de Churn";
         }
         // TODO classificações : ["Excelente","Produtiva","Neutra","Crítica","Risco de Churn"]
         if (pontuacao >= 20) return "Excelente";
