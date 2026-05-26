@@ -5,6 +5,7 @@ import java.util.Objects;
 
 public class AnalisadorTranscricao {
     private Map<String, Categoria> palavrasChave;
+    private Map<Categoria, Integer> categoriasEOcorrenciasEncontradas = new HashMap<>();
     private int pontuacao;
     private String transcricao;
 
