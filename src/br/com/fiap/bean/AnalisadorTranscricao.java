@@ -1,6 +1,7 @@
 package br.com.fiap.bean;
 
 import java.util.Map;
+import java.util.Objects;
 
 public class AnalisadorTranscricao {
     private Map<String, Categoria> palavraChave;
@@ -31,17 +32,18 @@ public class AnalisadorTranscricao {
 
     //Criando metodos
     public int contarOcorrencias(){
-        int count = 0;
+        int palavrasIdentificadas = 0;
         for(String palavra : this.transcricao.split(" ")){
             if (this.palavraChave.containsKey(palavra)){
-                count ++;
-            };
+                palavrasIdentificadas ++;
+            }
         }
 
-        return count;
+        return palavrasIdentificadas;
     }
 
     public String classificarReuniao(){
+
         if (pontuacao > 10) {
             return "Boa";
         } else if (pontuacao > 0 && pontuacao < 10){
@@ -51,8 +53,11 @@ public class AnalisadorTranscricao {
         }
     }
     public ResultadoAnalise processar(Reuniao reuniao){
-        ResultadoAnalise res = new ResultadoAnalise();
         setTranscricao(reuniao.getTranscricao());
-        return res;
+        String classificacao = classificarReuniao();
+        int pontuacao = getPontuacao();
+        boolean riscoChurn = !Objects.equals(classificacao, "Boa");
+
+        return new ResultadoAnalise(pontuacao,classificacao,riscoChurn);
     }
 }
