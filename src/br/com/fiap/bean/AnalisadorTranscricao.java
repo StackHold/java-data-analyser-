@@ -72,8 +72,7 @@ public class AnalisadorTranscricao {
         setTranscricao(reuniao.getTranscricao());
         String classificacao = classificarReuniao();
         int pontuacao = getPontuacao();
-        boolean riscoChurn = !Objects.equals(classificacao, "Boa");
-
+        boolean riscoChurn = Objects.equals(classificacao, "Risco de Churn");
         return new ResultadoAnalise(pontuacao,classificacao,riscoChurn);
     }
 }
