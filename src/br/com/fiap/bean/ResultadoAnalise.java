@@ -8,7 +8,11 @@ public class ResultadoAnalise {
 
     //Criando Constutor da classe
     public ResultadoAnalise() {}
-
+    public ResultadoAnalise(int pontuacao, String classificacao, boolean riscoChurn){
+        setClassificacao(classificacao);
+        setPontuacao(pontuacao);
+        setRiscoChurn(riscoChurn);
+    }
     //Criando getters e setters
     public int getPontuacao() {
         return pontuacao;
@@ -22,7 +26,7 @@ public class ResultadoAnalise {
     public void setClassificacao(String classificacao) {
         this.classificacao = classificacao;
     }
-    private boolean isRiscoChurn() {
+    private boolean getRiscoChurn() {
         return riscoChurn;
     }
     private void setRiscoChurn(boolean riscoChurn) {
@@ -31,7 +35,7 @@ public class ResultadoAnalise {
 
     //Criando metodos da classe
     public String gerarRelatorio(){
-        return String.format("====Relatório da Reunião====\nPontuação: %d\nClassificação: %s\nRisco de Churn: %s", getPontuacao(), getClassificacao(), this.riscoChurn? "Sim" : "Não");
+        return String.format("====Relatório da Reunião====\nPontuação: %d\nClassificação: %s\nRisco de Churn: %s", getPontuacao(), getClassificacao(), getRiscoChurn() ? "Sim" : "Não");
     }
 
     public void exibirResultado(){
