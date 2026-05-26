@@ -32,11 +32,14 @@ public class AnalisadorTranscricao {
     }
 
     //Criando metodos
-    public int contarOcorrencias(){
-        int palavrasIdentificadas = 0;
-        for(String palavra : this.transcricao.split(" ")){
-            if (this.palavrasChave.containsKey(palavra)){
-                palavrasIdentificadas ++;
+    public void contarOcorrencias(){
+        this.categoriasEOcorrenciasEncontradas.clear();
+
+        for(String palavra : this.transcricao.split("\\s")){
+            String palavraLimpa = palavra.toLowerCase().replace("[^a-zA-Z]", "");
+            if (this.palavrasChave.containsKey(palavraLimpa)){
+                Categoria cat = this.palavrasChave.get(palavra);
+                this.categoriasEOcorrenciasEncontradas.merge(cat, 1, Integer::sum);
             }
         }
 
