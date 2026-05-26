@@ -4,7 +4,7 @@ import java.util.Map;
 import java.util.Objects;
 
 public class AnalisadorTranscricao {
-    private Map<String, Categoria> palavraChave;
+    private Map<String, Categoria> palavrasChave;
     private int pontuacao;
     private String transcricao;
 
@@ -14,10 +14,10 @@ public class AnalisadorTranscricao {
 
     //Criando getters e setters
     public Map<String, Categoria> getPalavraChave() {
-        return palavraChave;
+        return palavrasChave;
     }
-    public void setPalavraChave(Map<String, Categoria> palavraChave) {
-        this.palavraChave = palavraChave;
+    public void setPalavraChave(Map<String, Categoria> palavrasChave) {
+        this.palavrasChave = palavrasChave;
     }
     public int getPontuacao() {
         return pontuacao;
@@ -34,7 +34,7 @@ public class AnalisadorTranscricao {
     public int contarOcorrencias(){
         int palavrasIdentificadas = 0;
         for(String palavra : this.transcricao.split(" ")){
-            if (this.palavraChave.containsKey(palavra)){
+            if (this.palavrasChave.containsKey(palavra)){
                 palavrasIdentificadas ++;
             }
         }
@@ -44,13 +44,16 @@ public class AnalisadorTranscricao {
 
     public String classificarReuniao(){
 
-        if (pontuacao > 10) {
-            return "Boa";
-        } else if (pontuacao > 0 && pontuacao < 10){
-            return  "Regular";
-        } else {
-            return "Ruim";
+        for (Categoria cat : this.palavrasChave.values()){
+            switch (cat){
+                case OPORTUNIDADE -> this.pontuacao += 15;
+                case PRODUTO_TOTVS -> this.pontuacao += 5;
+                case CONCORRENTE -> this.pontuacao -= 10;
+                case RISCO_CHURN -> this.pontuacao -= 25;
+            }
         }
+        // TODO classificações : ["Excelente","Produtiva","Neutra","Crítica","Risco de Churn"]
+
     }
     public ResultadoAnalise processar(Reuniao reuniao){
         setTranscricao(reuniao.getTranscricao());
