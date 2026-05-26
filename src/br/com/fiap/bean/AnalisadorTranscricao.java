@@ -1,11 +1,12 @@
 package br.com.fiap.bean;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
 public class AnalisadorTranscricao {
     private Map<String, Categoria> palavrasChave;
-    private Map<Categoria, Integer> categoriasEOcorrenciasEncontradas = new HashMap<>();
+    private final Map<Categoria, Integer> categoriasEOcorrenciasEncontradas = new HashMap<>();
     private int pontuacao;
     private String transcricao;
 
@@ -14,17 +15,11 @@ public class AnalisadorTranscricao {
 
 
     //Criando getters e setters
-    public Map<String, Categoria> getPalavraChave() {
-        return palavrasChave;
-    }
     public void setPalavraChave(Map<String, Categoria> palavrasChave) {
         this.palavrasChave = palavrasChave;
     }
     public int getPontuacao() {
         return pontuacao;
-    }
-    public void setPontuacao(int pontuacao) {
-        this.pontuacao = pontuacao;
     }
 
     public void setTranscricao(String transcricao) {
@@ -32,7 +27,7 @@ public class AnalisadorTranscricao {
     }
 
     //Criando metodos
-    public void contarOcorrencias(){
+    private void contarOcorrencias(){
         this.categoriasEOcorrenciasEncontradas.clear();
 
         for(String palavra : this.transcricao.split("\\s")){
@@ -42,12 +37,10 @@ public class AnalisadorTranscricao {
                 this.categoriasEOcorrenciasEncontradas.merge(cat, 1, Integer::sum);
             }
         }
-
-        return palavrasIdentificadas;
     }
 
-    public String classificarReuniao(){
-
+    private String classificarReuniao(){
+        contarOcorrencias();
         this.categoriasEOcorrenciasEncontradas.forEach((categoria, quantidade)->{
             switch (categoria){
                 case OPORTUNIDADE -> this.pontuacao += 15 * quantidade;
@@ -61,7 +54,7 @@ public class AnalisadorTranscricao {
         if (chanceChurn >= 2) {
             return "Risco de Churn";
         }
-        // TODO classificações : ["Excelente","Produtiva","Neutra","Crítica","Risco de Churn"]
+
         if (pontuacao >= 20) return "Excelente";
         if (pontuacao >= 5)  return "Produtiva";
         if (pontuacao >= -5) return "Neutra / Alerta";
