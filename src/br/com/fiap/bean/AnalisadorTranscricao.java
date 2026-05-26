@@ -38,7 +38,7 @@ public class AnalisadorTranscricao {
             return "Ruim";
         }
     }
-    public void processar(Reuniao reuniao){
+    public ResultadoAnalise processar(Reuniao reuniao){
         String transcricao = reuniao.getTranscricao();
     }
 }
