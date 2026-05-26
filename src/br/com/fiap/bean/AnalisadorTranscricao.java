@@ -7,7 +7,7 @@ import java.util.Objects;
 public class AnalisadorTranscricao {
     private Map<String, Categoria> palavrasChave;
     private final Map<Categoria, Integer> categoriasEOcorrenciasEncontradas = new HashMap<>();
-    private int pontuacao;
+    private int pontuacao = 0;
     private String transcricao;
 
     //Criando construtores
@@ -25,10 +25,10 @@ public class AnalisadorTranscricao {
     private void contarOcorrencias(){
         this.categoriasEOcorrenciasEncontradas.clear();
 
-        for(String palavra : this.transcricao.split("\\s")){
-            String palavraLimpa = palavra.replace("[^a-zA-Z]", "").toLowerCase();
+        for(String palavra : this.transcricao.split("\\s+")){
+            String palavraLimpa = palavra.toLowerCase().replaceAll("[^a-zA-Z\\u00C0-\\u00FF]", "");
             if (this.palavrasChave.containsKey(palavraLimpa)){
-                Categoria cat = this.palavrasChave.get(palavra);
+                Categoria cat = this.palavrasChave.get(palavraLimpa);
                 this.categoriasEOcorrenciasEncontradas.merge(cat, 1, Integer::sum);
             }
         }
