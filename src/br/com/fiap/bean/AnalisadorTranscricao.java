@@ -1,17 +1,20 @@
 package br.com.fiap.bean;
 
+import java.util.Map;
+
 public class AnalisadorTranscricao {
-    private String palavraChave;
+    private Map<String, Categoria> palavraChave;
     private int pontuacao;
 
     //Criando construtores
     public AnalisadorTranscricao() {}
 
+
     //Criando getters e setters
-    public String getPalavraChave() {
+    public Map<String, Categoria> getPalavraChave() {
         return palavraChave;
     }
-    public void setPalavraChave(String palavraChave) {
+    public void setPalavraChave(Map<String, Categoria> palavraChave) {
         this.palavraChave = palavraChave;
     }
     public int getPontuacao() {
@@ -34,5 +37,8 @@ public class AnalisadorTranscricao {
         } else {
             return "Ruim";
         }
+    }
+    public void processar(Reuniao reuniao){
+        String transcricao = reuniao.getTranscricao();
     }
 }
