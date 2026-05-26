@@ -57,7 +57,11 @@ public class AnalisadorTranscricao {
             }
         }
         // TODO classificações : ["Excelente","Produtiva","Neutra","Crítica","Risco de Churn"]
-
+        if (pontuacao >= 20) return "Excelente";
+        if (pontuacao >= 5)  return "Produtiva";
+        if (pontuacao >= -5) return "Neutra / Alerta";
+        if (pontuacao >= -20) return "Crítica";
+        return "Risco de Churn";
     }
     public ResultadoAnalise processar(Reuniao reuniao){
         setTranscricao(reuniao.getTranscricao());
