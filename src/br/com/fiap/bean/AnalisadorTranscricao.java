@@ -5,6 +5,7 @@ import java.util.Map;
 public class AnalisadorTranscricao {
     private Map<String, Categoria> palavraChave;
     private int pontuacao;
+    private String transcricao;
 
     //Criando construtores
     public AnalisadorTranscricao() {}
@@ -24,9 +25,20 @@ public class AnalisadorTranscricao {
         this.pontuacao = pontuacao;
     }
 
+    public void setTranscricao(String transcricao) {
+        this.transcricao = transcricao;
+    }
+
     //Criando metodos
     public int contarOcorrencias(){
-        return 0;
+        int count = 0;
+        for(String palavra : this.transcricao.split(" ")){
+            if (this.palavraChave.containsKey(palavra)){
+                count ++;
+            };
+        }
+
+        return count;
     }
 
     public String classificarReuniao(){
@@ -39,6 +51,8 @@ public class AnalisadorTranscricao {
         }
     }
     public ResultadoAnalise processar(Reuniao reuniao){
-        String transcricao = reuniao.getTranscricao();
+        ResultadoAnalise res = new ResultadoAnalise();
+        setTranscricao(reuniao.getTranscricao());
+        return res;
     }
 }
