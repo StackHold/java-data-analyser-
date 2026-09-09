@@ -52,4 +52,16 @@ public class Cliente extends Pessoa{
     public String apresentar() {
         return String.format("Nome: %s\nEmail: %s\nCNPJ: %s\nSegmento da empresa: %s", super.getNome(), super.getEmail(), getCnpj(), getSegmento());
     }
+
+    public String validarCnpj(String cnpj) {
+        if (this.cnpj == null) {
+            return "CNPJ não informado";
+        }
+        String numeros = this.cnpj.replaceAll("[^0-9]", "");
+        if (numeros.length() != 14) {
+            return "CNPJ deve conter 14 dígitos";
+        }
+        return "O CNPJ informado é válido";
+    }
+
 }
