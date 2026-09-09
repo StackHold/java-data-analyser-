@@ -2,19 +2,27 @@ package br.com.fiap.bean;
 //Importando classe pai(Pessoa) para Cliente
 public class Cliente extends Pessoa{
     //Criando atributo para classe Cliente
+    private int idCliente;
     private String cnpj;
     private String segmento;
 
     //Criando construtor da classe Cliente
     public Cliente() {}
-    public Cliente(String nome, String email, String cnpj, String segmento) {
+    public Cliente(int idCliente, String cnpj, String segmento, String nome, String email) {
+        this.idCliente = idCliente;
+        this.cnpj = cnpj;
+        this.segmento = segmento;
         super.setNome(nome);
         super.setEmail(email);
-        setCnpj(cnpj);
-        setSegmento(segmento);
     }
 
     //Criando getters e setters da classe Cliente
+    public int getIdCliente() {
+        return idCliente;
+    }
+    public void setIdCliente(int idCliente) {
+        this.idCliente = idCliente;
+    }
     public String getCnpj() {
         return cnpj;
     }
