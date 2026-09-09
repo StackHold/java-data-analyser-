@@ -18,21 +18,24 @@ public class ClienteDAO {
     }
 
     public String inserir(Cliente cliente){
-        String sql = "insert into CLIENTE(id_cliente, cnpj, segemtno, nome, email) values(?, ?, ?)";
-        try(PreparedStatement ps = getCon().prepareStatement(sql)){
-            ps.setInt(1, cliente.getIdCliente());
-            ps.setString(2, cliente.getCnpj());
-            ps.setString(3, cliente.getSegmento());
-            ps.setString(4,cliente.getNome());
-            ps.setString(5, cliente.getEmail());
+        String sql = "insert into CLIENTE(CNPJ, SEGMENTO, NOME, EMAIL) values(?, ?, ?, ?)";
+        try(PreparedStatement ps = getCon().prepareStatement(sql, new String[]{"ID_CLIENTE"})){
+            ps.setString(1, cliente.getCnpj());
+            ps.setString(2, cliente.getSegmento());
+            ps.setString(3,cliente.getNome());
+            ps.setString(4, cliente.getEmail());
             if (ps.executeUpdate() > 0) {
-                return "Cliente foi inserido com sucesso!";
+                try (ResultSet rs = ps.getGeneratedKeys()) {
+                    if (rs.next()) {
+                        cliente.setIdCliente(rs.getInt(1));
+                    }
+                }
+                return "Cliente inserido com sucesso! ID: " + cliente.getIdCliente();
             } else {
                 return "Houve um erro ao inserir o cliente!";
             }
         } catch (SQLException e) {
-            System.out.println("ERRO: erro de SQL");
-            return null;
+            return "ERRO: erro de SQL" + e.getMessage();
         }
     }
 
@@ -101,10 +104,8 @@ public class ClienteDAO {
     public Cliente buscarPorId(int idCliente) {
         String sql = "select ID_CLIENTE, NOME, EMAIL, CNPJ, SEGMENTO from CLIENTE where ID_CLIENTE = ?";
         Cliente cliente = null;
-
         try (PreparedStatement ps = getCon().prepareStatement(sql)) {
             ps.setInt(1, idCliente);
-
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     cliente = new Cliente(
