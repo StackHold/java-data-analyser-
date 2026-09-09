@@ -1,4 +1,124 @@
 package br.com.fiap.dao;
 
+import br.com.fiap.bean.Cliente;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 public class ClienteDAO {
+    private Connection con;
+
+    public ClienteDAO(Connection con){this.con = con;}
+
+    public Connection getCon(){
+        return con;
+    }
+
+    public String inserir(Cliente cliente){
+        String sql = "insert into CLIENTE(id_cliente, cnpj, segemtno, nome, email) values(?, ?, ?)";
+        try(PreparedStatement ps = getCon().prepareStatement(sql)){
+            ps.setInt(1, cliente.getIdCliente());
+            ps.setString(2, cliente.getCnpj());
+            ps.setString(3, cliente.getSegmento());
+            ps.setString(4,cliente.getNome());
+            ps.setString(5, cliente.getEmail());
+            if (ps.executeUpdate() > 0) {
+                return "Cliente foi inserido com sucesso!";
+            } else {
+                return "Houve um erro ao inserir o cliente!";
+            }
+        } catch (SQLException e) {
+            System.out.println("ERRO: erro de SQL");
+            return null;
+        }
+    }
+
+    public String atualizar(Cliente cliente){
+        String sql = "update CLIENTE set cnpj = ?, segmento = ?, nome = ?, email = ? where id_cliente = ?";
+        try(PreparedStatement ps = getCon().prepareStatement(sql)) {
+            ps.setInt(1, cliente.getIdCliente());
+            ps.setString(2, cliente.getCnpj());
+            ps.setString(3, cliente.getSegmento());
+            ps.setString(4,cliente.getNome());
+            ps.setString(5, cliente.getEmail());
+            if (ps.executeUpdate() > 0) {
+                return "Cliente foi alterado com sucesso!";
+            } else {
+                return "Não foi possivel alterar cliente";
+            }
+        } catch (SQLException e) {
+            System.out.println("ERRO: erro de SQL" + e.getMessage());
+            return null;
+        }
+    }
+
+    public String excluir(Cliente cliente){
+        String sql = "delete from CLIENTE where id_cliente = ?";
+        try(PreparedStatement ps = getCon().prepareStatement(sql)) {
+            ps.setInt(1, cliente.getIdCliente());
+            ps.setString(2, cliente.getCnpj());
+            ps.setString(3, cliente.getSegmento());
+            ps.setString(4,cliente.getNome());
+            ps.setString(5, cliente.getEmail());
+            if (ps.executeUpdate() > 0) {
+                return "Cliente foi excluido com sucesso!";
+            } else {
+                return "Falha ao excluir o cliente";
+            }
+        } catch (SQLException e) {
+            System.out.println("ERRO: erro de SQL" + e.getMessage());
+            return null;
+        }
+    }
+
+    public ArrayList<Cliente> listarClientes(){
+        String sql = "select * from CLIENTE order by id_cliente";
+        ArrayList<Cliente> listaCliente = new ArrayList<>();
+        try(PreparedStatement ps = getCon().prepareStatement(sql); ResultSet rs = ps.executeQuery()){
+            if(rs != null){
+                while(rs.next()){
+                    Cliente cliente = new Cliente();
+                    cliente.setIdCliente(rs.getInt(1));
+                    cliente.setCnpj(rs.getString(2));
+                    cliente.setSegmento(rs.getString(3));
+                    cliente.setNome(rs.getString(4));
+                    cliente.setEmail(rs.getString(5));
+                    listaCliente.add(cliente);
+                }
+                return listaCliente;
+            } else {
+                return null;
+            }
+        } catch (SQLException e) {
+            System.out.println("ERRO: erro de SQL" + e.getMessage());
+            return null;
+        }
+    }
+
+    public Cliente buscarPorId(int idCliente) {
+        String sql = "select ID_CLIENTE, NOME, EMAIL, CNPJ, SEGMENTO from CLIENTE where ID_CLIENTE = ?";
+        Cliente cliente = null;
+
+        try (PreparedStatement ps = getCon().prepareStatement(sql)) {
+            ps.setInt(1, idCliente);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    cliente = new Cliente(
+                            rs.getInt("ID_CLIENTE"),
+                            rs.getString("NOME"),
+                            rs.getString("EMAIL"),
+                            rs.getString("CNPJ"),
+                            rs.getString("SEGMENTO")
+                    );
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("ERRO de SQL ao buscar cliente: " + e.getMessage());
+        }
+        return cliente;
+    }
 }
