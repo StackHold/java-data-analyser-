@@ -112,7 +112,7 @@ public class ClienteDAO {
                             rs.getInt("ID_CLIENTE"),
                             rs.getString("NOME"),
                             rs.getString("EMAIL"),
-                            rs.getString("CNPJ"),
+                            rs.getString("CNPJ").trim(),
                             rs.getString("SEGMENTO")
                     );
                 }
