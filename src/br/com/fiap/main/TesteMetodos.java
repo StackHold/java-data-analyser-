@@ -11,6 +11,7 @@ public class TesteMetodos {
         String cnpj = "12345678000195";
         String cnpj2 = "";
         String cnpj3 = "4556328792";
+        String cnpj4 = "12.345.678/0001-95";
 
         Cliente cliente = new Cliente();
         cliente.setCnpj(cnpj);
@@ -21,11 +22,15 @@ public class TesteMetodos {
         Cliente cliente3 = new Cliente();
         cliente3.setCnpj(cnpj3);
 
+        Cliente cliente4 = new Cliente();
+        cliente4.setCnpj(cnpj4);
+
         System.out.println("Resultados:");
         System.out.println("------------------------");
         System.out.println(cliente.validarCnpj(cnpj));
         System.out.println(cliente2.validarCnpj(cnpj2));
         System.out.println(cliente3.validarCnpj(cnpj3));
+        System.out.println(cliente4.validarCnpj(cnpj4));
 
         System.out.println("\n============= 2°Teste: metodo validarCPF() =============\n");
         String cpf  = "52998224725";
