@@ -34,6 +34,10 @@ public class Reuniao {
         this.idReuniao = idReuniao;
     }
 
+    public LocalDate getData() {
+        return data;
+    }
+
     public void setData(LocalDate data) {
         try{
             if(data.isAfter(LocalDate.now())){
@@ -44,6 +48,10 @@ public class Reuniao {
             System.out.println("Não foi possível receber a data da reunião: " + e.getMessage());
         }
 
+    }
+
+    public Cliente getCliente() {
+        return cliente;
     }
 
     public void setCliente(Cliente cliente) {
