@@ -8,6 +8,16 @@ public class Cliente extends Pessoa{
 
     //Criando construtor da classe Cliente
     public Cliente() {}
+
+    //Construtor para o main
+    public Cliente(String nome, String email, String cnpj, String segmento) {
+        super.setNome(nome);
+        super.setEmail(email);
+        setCnpj(cnpj);
+        setSegmento(segmento);
+    }
+
+    //Construtor para o cliente vindo do banco já com o ID.
     public Cliente(int idCliente, String cnpj, String segmento, String nome, String email) {
         this.idCliente = idCliente;
         this.cnpj = cnpj;
@@ -15,6 +25,8 @@ public class Cliente extends Pessoa{
         super.setNome(nome);
         super.setEmail(email);
     }
+
+
 
     //Criando getters e setters da classe Cliente
     public int getIdCliente() {
@@ -40,4 +52,16 @@ public class Cliente extends Pessoa{
     public String apresentar() {
         return String.format("Nome: %s\nEmail: %s\nCNPJ: %s\nSegmento da empresa: %s", super.getNome(), super.getEmail(), getCnpj(), getSegmento());
     }
+
+    public String validarCnpj(String cnpj) {
+        if (this.cnpj == null || this.cnpj == "") {
+            return "CNPJ não informado";
+        }
+        String numeros = this.cnpj.replaceAll("[^0-9]", "");
+        if (numeros.length() != 14) {
+            return "CNPJ deve conter 14 dígitos";
+        }
+        return "O CNPJ informado é válido";
+    }
+
 }

@@ -22,7 +22,7 @@ public class Main {
                 nome = scan.nextLine();
                 email = scan.nextLine();
                 cpf = scan.nextLine();
-                Funcionario funcio = new Funcionario(nome, email, cpf);
+                Funcionario funcio = new Funcionario(nome, email, cpf, senha);
                 System.out.println("====== Bem vindo ======\n\n" + funcio.apresentar());
 
                 System.out.println("--------------------------------------------\n");
@@ -41,7 +41,7 @@ public class Main {
                 //Passagem da transcrição da reunião e exibição de suas informações
                 System.out.println("Insira a transcrição da reunião realizada:");
                 transcricao = scan.nextLine();
-                Reuniao reuniao = new Reuniao(dataAtual, transcricao, funcio, cliente);
+                Reuniao reuniao = new Reuniao(dataAtual, transcricao, cliente);
                 System.out.println("====== Reunião Cadastrada ======\n\n");
                 System.out.println("Informações da reunião:\n" + reuniao.exibirInfo());
 
