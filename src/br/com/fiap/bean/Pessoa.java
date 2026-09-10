@@ -26,4 +26,23 @@ public class Pessoa {
     public String apresentar(){
         return String.format("Nome: %s\nEmail: %s", getNome(), getEmail());
     }
+
+    public String validarEmail(String email){
+        if (this.email == null || this.email == "") {
+            return "Email inválido";
+        }
+        String e = this.email.trim();
+        int posArroba = e.indexOf("@");
+        if (posArroba == -1 || e.indexOf('@', posArroba + 1) != - 1){
+            return "O email deve conter @";
+        }
+        if (posArroba == 0) {
+            return "Email deve ter texto antes do @";
+        }
+        if (posArroba == e.length() - 1){
+            return "Email deve ter texto depois do @";
+        }
+        return "Email valido!";
+    }
+
 }
