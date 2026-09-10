@@ -99,13 +99,12 @@ public class ClienteDAO {
             ps.setInt(1, idCliente);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
-                    cliente = new Cliente(
-                            rs.getInt("ID_CLIENTE"),
-                            rs.getString("NOME"),
-                            rs.getString("EMAIL"),
-                            rs.getString("CNPJ").trim(),
-                            rs.getString("SEGMENTO")
-                    );
+                    cliente = new Cliente();
+                    cliente.setIdCliente(rs.getInt("ID_CLIENTE"));
+                    cliente.setNome(rs.getString("NOME"));
+                    cliente.setEmail(rs.getString("EMAIL"));
+                    cliente.setCnpj(rs.getString("CNPJ").trim());
+                    cliente.setSegmento(rs.getString("SEGMENTO"));
                 }
             }
         } catch (SQLException e) {
