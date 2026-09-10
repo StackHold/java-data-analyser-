@@ -54,7 +54,7 @@ public class Cliente extends Pessoa{
     }
 
     public String validarCnpj(String cnpj) {
-        if (this.cnpj == null) {
+        if (this.cnpj == null || this.cnpj == "") {
             return "CNPJ não informado";
         }
         String numeros = this.cnpj.replaceAll("[^0-9]", "");
