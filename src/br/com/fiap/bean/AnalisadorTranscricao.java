@@ -35,6 +35,7 @@ public class AnalisadorTranscricao {
     }
 
     private String classificarReuniao(){
+        this.pontuacao = 0;
         contarOcorrencias();
         this.categoriasEOcorrenciasEncontradas.forEach((categoria, quantidade)->{
             switch (categoria){
