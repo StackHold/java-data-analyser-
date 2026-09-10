@@ -53,8 +53,7 @@ public class ClienteDAO {
                 return "Não foi possivel alterar cliente";
             }
         } catch (SQLException e) {
-            System.out.println("ERRO: erro de SQL" + e.getMessage());
-            return null;
+            return "ERRO: erro de SQL" + e.getMessage();
         }
     }
 
