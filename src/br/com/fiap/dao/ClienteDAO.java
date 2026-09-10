@@ -42,11 +42,11 @@ public class ClienteDAO {
     public String atualizar(Cliente cliente){
         String sql = "update CLIENTE set cnpj = ?, segmento = ?, nome = ?, email = ? where id_cliente = ?";
         try(PreparedStatement ps = getCon().prepareStatement(sql)) {
-            ps.setInt(1, cliente.getIdCliente());
-            ps.setString(2, cliente.getCnpj());
-            ps.setString(3, cliente.getSegmento());
-            ps.setString(4,cliente.getNome());
-            ps.setString(5, cliente.getEmail());
+            ps.setString(1, cliente.getCnpj());
+            ps.setString(2, cliente.getSegmento());
+            ps.setString(3, cliente.getNome());
+            ps.setString(4, cliente.getEmail());
+            ps.setInt(5, cliente.getIdCliente());
             if (ps.executeUpdate() > 0) {
                 return "Cliente foi alterado com sucesso!";
             } else {
@@ -62,10 +62,6 @@ public class ClienteDAO {
         String sql = "delete from CLIENTE where id_cliente = ?";
         try(PreparedStatement ps = getCon().prepareStatement(sql)) {
             ps.setInt(1, cliente.getIdCliente());
-            ps.setString(2, cliente.getCnpj());
-            ps.setString(3, cliente.getSegmento());
-            ps.setString(4,cliente.getNome());
-            ps.setString(5, cliente.getEmail());
             if (ps.executeUpdate() > 0) {
                 return "Cliente foi excluido com sucesso!";
             } else {
@@ -81,24 +77,20 @@ public class ClienteDAO {
         String sql = "select * from CLIENTE order by id_cliente";
         ArrayList<Cliente> listaCliente = new ArrayList<>();
         try(PreparedStatement ps = getCon().prepareStatement(sql); ResultSet rs = ps.executeQuery()){
-            if(rs != null){
-                while(rs.next()){
-                    Cliente cliente = new Cliente();
-                    cliente.setIdCliente(rs.getInt(1));
-                    cliente.setCnpj(rs.getString(2));
-                    cliente.setSegmento(rs.getString(3));
-                    cliente.setNome(rs.getString(4));
-                    cliente.setEmail(rs.getString(5));
-                    listaCliente.add(cliente);
-                }
-                return listaCliente;
-            } else {
-                return null;
+            while(rs.next()){
+                Cliente cliente = new Cliente();
+                cliente.setIdCliente(rs.getInt("ID_CLIENTE"));
+                cliente.setCnpj(rs.getString("CNPJ").trim());
+                cliente.setSegmento(rs.getString("SEGMENTO"));
+                cliente.setNome(rs.getString("NOME"));
+                cliente.setEmail(rs.getString("EMAIL"));
+
+                listaCliente.add(cliente);
             }
         } catch (SQLException e) {
-            System.out.println("ERRO: erro de SQL" + e.getMessage());
-            return null;
+            System.out.println("ERRO: erro de SQL ao listar clientes " + e.getMessage());
         }
+        return listaCliente;
     }
 
     public Cliente buscarPorId(int idCliente) {
