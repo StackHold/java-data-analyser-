@@ -1,6 +1,7 @@
 package br.com.fiap.submenus;
 
 import br.com.fiap.bean.Cliente;
+import br.com.fiap.bean.Pessoa;
 import br.com.fiap.dao.ClienteDAO;
 
 import java.sql.Connection;
@@ -29,7 +30,7 @@ public class ManipularCliente {
                 opcao = scan.nextInt();
                 switch (opcao){
                     case 1:
-                        String nome, email, cnpj, segmento, valida;
+                        String nome, email, cnpj, segmento, valida, valida2;
                         System.out.println("Informe:");
                         System.out.println("Nome:");
                         nome = scan.nextLine();
@@ -41,9 +42,14 @@ public class ManipularCliente {
                         segmento = scan.nextLine();
 
                         Cliente cliente = new Cliente(nome, email, cnpj, segmento);
-                        valida = cliente.validarCnpj(cnpj);
+                        valida = cliente.validarEmail(email);
                         if (valida != null){
-                            System.out.println("ERRO:" + valida);
+                            System.out.println("ERRO: " + valida);
+                            break;
+                        }
+                        valida2 = cliente.validarCnpj(cnpj);
+                        if (valida2 != null){
+                            System.out.println("ERRO:" + valida2);
                             break;
                         }
                         System.out.println(clienteDAO.inserir(cliente));
@@ -60,6 +66,7 @@ public class ManipularCliente {
                                 System.out.println(c.apresentar());
                                 System.out.println("-------------------------");
                             }
+                            System.out.println("Total: " + listaClientes.size() + "Cliente(s)");
                         }
                         break;
                     case 3:
