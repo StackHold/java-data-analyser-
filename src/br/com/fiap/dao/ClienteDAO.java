@@ -68,8 +68,7 @@ public class ClienteDAO {
                 return "Falha ao excluir o cliente";
             }
         } catch (SQLException e) {
-            System.out.println("ERRO: erro de SQL" + e.getMessage());
-            return null;
+            return "ERRO: erro de SQL" + e.getMessage();
         }
     }
 
