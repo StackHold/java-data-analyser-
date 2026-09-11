@@ -16,6 +16,13 @@ public class Funcionario extends Pessoa{
         super.setEmail(email);
     }
 
+    public Funcionario(String cpf, String senha, String nome, String email) {
+        this.cpf = cpf;
+        this.senha = senha;
+        super.setNome(nome);
+        super.setEmail(email);
+    }
+
     //Criando getters e setters da classe Funcionario
     public String getCpf() {
         return cpf;
