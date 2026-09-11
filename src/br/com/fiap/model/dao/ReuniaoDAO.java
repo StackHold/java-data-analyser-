@@ -1,7 +1,7 @@
-package br.com.fiap.dao;
+package br.com.fiap.model.dao;
 
-import br.com.fiap.bean.Cliente;
-import br.com.fiap.bean.Reuniao;
+import br.com.fiap.model.bean.Cliente;
+import br.com.fiap.model.bean.Reuniao;
 
 import java.sql.*;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package br.com.fiap.bean;
+package br.com.fiap.model.bean;
 //Importando classe pai(Pessoa) para Funcionario
 public class Funcionario extends Pessoa{
     //Criando atributo para classe Funcionario

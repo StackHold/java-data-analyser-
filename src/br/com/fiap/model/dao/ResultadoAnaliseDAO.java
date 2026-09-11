@@ -1,6 +1,6 @@
-package br.com.fiap.dao;
+package br.com.fiap.model.dao;
 
-import br.com.fiap.bean.ResultadoAnalise;
+import br.com.fiap.model.bean.ResultadoAnalise;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

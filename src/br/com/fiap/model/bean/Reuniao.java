@@ -1,4 +1,4 @@
-package br.com.fiap.bean;
+package br.com.fiap.model.bean;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 

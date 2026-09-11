@@ -1,6 +1,6 @@
 package br.com.fiap.main;
 
-import br.com.fiap.bean.*;
+import br.com.fiap.model.bean.*;
 
 import java.time.LocalDate;
 import java.util.Map;

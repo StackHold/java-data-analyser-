@@ -1,4 +1,4 @@
-package br.com.fiap.bean;
+package br.com.fiap.model.bean;
 //Pessoa será a classe pai para Cliente e Funcionario
 public class Pessoa {
     //Criando atributos da classe pessoa.
